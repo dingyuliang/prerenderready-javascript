@@ -42,12 +42,10 @@
 
         Object.defineProperty(this, "_ready", {
             get: function () {
-                console.log(window.prerenderReady)
                 return window.prerenderReady;
             },
             set: function (value) {
                 window.prerenderReady = value;
-                console.log(value)
             }
         });
 
