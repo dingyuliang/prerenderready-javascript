@@ -1,5 +1,5 @@
-# prerender-jswrapper
-The JavaScript wrapper for prerender ready, within jQuery, angularJS.
+# prerender-jsready
+The JavaScript library for prerender ready, within jQuery, angularJS.
 
 ## jQuery
 
