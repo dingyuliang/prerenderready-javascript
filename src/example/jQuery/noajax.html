@@ -11,7 +11,8 @@
               maxTimeout: 15000,
               ajaxCompleteTimeout: 100,
               debug: true,
-          }; 
+          };
+
       </script>
       <!--Please put prerenderio.js before any other javascript.-->
       <script src="../../prerender/prerenderio.js"></script>
@@ -19,16 +20,14 @@
       <script data-require="jquery@1.11.3" data-semver="1.11.3" src="https://code.jquery.com/jquery-1.11.3.js"></script>      
       <!--Please put prerenderjQuery.js after jQuery javascript.-->
       <script src="../../prerender/prerenderjQuery.js"></script>
-
-      <script src="script.js"></script>
   </head>
 
   <body style="padding:0px 20px;">
-      <h1>Hello Prerender.IO!</h1>
+      <h1>Hello Prerender.IO - No Ajax!</h1>
       <p>
           prerenderOptions:
           <script>
-                document.write(JSON.stringify(window.prerenderOptions));
+              document.write(JSON.stringify(window.prerenderOptions));
           </script>
       </p>
       <div class="ajax-data-container"></div>

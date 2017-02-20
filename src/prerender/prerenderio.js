@@ -4,7 +4,13 @@
     var defaultOptions = {
         // maxTimeout for all ajax calls, after this timeout, it will set prerenderReady to true.
         // if there is no ajax call, will use this value.
+        // if maxTimeout is NULL or any value <=0, won't setup timeout.
         maxTimeout: 1000,
+
+        // noAjaxCheckTimeout for no ajax pages. Since Prerender.io has its min timeout, to improve performance, 
+        // we can setup noAjaxCheckTimeout to notify Prerender.io that page is loaded completedly since there is no ajax calls.
+        // the number depends on your application load time.
+        noAjaxCheckTimeout:100,
 
         // ajaxCompleteTimeout for single ajax call, after this timeout, it will call complete() method to check whether all ajax calls have been finished, 
         // if yes, then set prerenderReady to true.
@@ -28,17 +34,20 @@
 
     function PrerenderIO(options) {
         this._ajaxCount = 0;
-        this._maxTimeoutObj = null;
+        this._maxTimeoutID = null;
+        this._ajaxCompleteTimeoutID = null;
         this._options = {};
 
         this.config(options || defaultOptions);
 
         Object.defineProperty(this, "_ready", {
             get: function () {
-                return window.prerenderReady || false;
+                console.log(window.prerenderReady)
+                return window.prerenderReady;
             },
             set: function (value) {
                 window.prerenderReady = value;
+                console.log(value)
             }
         });
 
@@ -53,23 +62,62 @@
                 $this._options[pName] = options[pName];
             }
 
+            // maxTimeout setting
             $this.log("maxTimeout start")
-            if ($this._maxTimeoutObj) {
-                clearTimeout($this._maxTimeoutObj)
+            if ($this._maxTimeoutID) {
+                clearTimeout($this._maxTimeoutID);
+            }
+            // always call this, so that we can make sure _ready = true after maxTimeout.
+            if ($this._options.maxTimeout && $this._options.maxTimeout > 0) {
+                $this._maxTimeoutID = setTimeout(function () {
+                    $this.complete();
+                    clearTimeout($this._maxTimeoutID);
+                    $this.log("maxTimeout end");
+                }, $this._options.maxTimeout);
             }
 
+            // noAjaxCheckTimeout setting
+            $this.log("noAjaxCheckTimeout start")
+            if ($this._ajaxCompleteTimeoutID) {
+                clearTimeout($this._ajaxCompleteTimeoutID);
+            }
             // always call this, so that we can make sure _ready = true after maxTimeout.
-            $this._maxTimeoutObj = setTimeout(function () {
-                $this.complete();
-                $this.log("maxTimeout end")
-            }, $this._options.maxTimeout);
+            if ($this._options.noAjaxCheckTimeout && $this._options.noAjaxCheckTimeout > 0) {
+                $this._ajaxCompleteTimeoutID = setTimeout(function () {
+                    if ($this._ajaxCount <= 0) {
+                        $this.complete();
+                    }
+                    clearTimeout($this._ajaxCompleteTimeoutID);
+                    $this.log("noAjaxCheckTimeout end");
+                }, $this._options.noAjaxCheckTimeout);
+            }
         },
         init: function () {
+            //this._ready = false;
+            var $this = this;
+
+            // overwrite window.setTimeout default logic.
+            var oldSetTimeout = window.setTimeout;
+            window.setTimeout = function (fn, timeout, prerender) {
+                var needPrerender = $this._options.enable == true && prerender == true;
+
+                if (needPrerender) {
+                    $this.ajaxStart();
+                }
+
+                oldSetTimeout(function () {
+                    fn.apply(null);
+
+                    if (needPrerender) {
+                        $this.ajaxComplete();
+                    }
+
+                }, timeout);
+            };
+
         },
         complete: function () {
-            if (this._ready != true) {
-                this._ready = true;
-            }
+            this._ready = true;
             this.log("complete");
         },
         ajaxStart: function () {
@@ -87,8 +135,8 @@
             var $this = this;
             
             if ($this._options.enable == true) {
-                $this._ajaxCount--;
                 setTimeout(function () {
+                    $this._ajaxCount--;
                     if ($this._ajaxCount <= 0) {
                         $this.complete();
                     }

@@ -8,7 +8,7 @@
         // this setting is optional, the default maxTimeout is 1000 ms.
         // but if your longest ajax request will take longer than 1000 ms, please setup the maxTimeout setting. 
         window.prerenderOptions = {
-            maxTimeout: 6000,
+            maxTimeout: null,
             ajaxCompleteTimeout: 10,
             debug: true,
         };
@@ -23,9 +23,15 @@
     <script src="script.js"></script>
 </head>
 
-<body ng-app="prerenderExample">
+<body ng-app="prerenderExample" style="padding:0px 20px;">
     <div ng-controller="prerenderExampleController">
-        <h1>Hello Plunker!</h1>
+        <h1>Hello Prerender.IO!</h1>
+        <p>
+            prerenderOptions:
+            <script>
+                document.write(JSON.stringify(window.prerenderOptions));
+            </script>
+        </p>
     </div>
 </body>
 

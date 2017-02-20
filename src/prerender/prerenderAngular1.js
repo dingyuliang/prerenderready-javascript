@@ -37,7 +37,20 @@
     }])
     .config(['$httpProvider', function ($httpProvider) {
         $httpProvider.interceptors.push("prerenderHttpInterceptor");
+    }])
+    .factory("prerenderTimeout", ["$timeout", function ($timeout) {
+        return function () {
+            window.prerender.ajaxStart();
+            $timeout
+                .apply(null, arguments)
+                .then(
+                function () {
+                    window.prerender.ajaxComplete();
+                }, function () {
+                    window.prerender.ajaxComplete();
+                });
+        };
     }]);
-	
+    
 })(window, angular)
 
