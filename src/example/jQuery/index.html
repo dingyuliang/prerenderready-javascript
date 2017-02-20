@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+      <script>
+          // setup prerenderOptions before load prerenderio. which will overwrite default options.
+          // or you can overwrite it in script.js.
+          window.prerenderOptions = {
+              maxTimeout: 6000,
+              ajaxCompleteTimeout: 10,
+              debug: true,
+          };
+      </script>
+      <!--Please put prerenderio.js before any other javascript.-->
+      <script src="../../prerender/prerenderio.js"></script>
+
+      <script data-require="jquery@1.11.3" data-semver="1.11.3" src="https://code.jquery.com/jquery-1.11.3.js"></script>      
+      <!--Please put prerenderjQuery.js after jQuery javascript.-->
+      <script src="../../prerender/prerenderjQuery.js"></script>
+
+      <script src="script.js"></script>
+  </head>
+
+  <body>
+    <h1>Hello Plunker!</h1>
+    <div class="ajax-data-container"></div>
+  </body>
+
+</html>

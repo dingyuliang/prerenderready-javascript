@@ -1,0 +1,49 @@
+(function (window, angular) {
+
+    // config prerender.
+    //window.prerender.config({
+    //    maxTimeout: 5000,
+    //    debug:true
+    //});
+
+    var module = angular.module("prerenderExample",[]);
+
+    module.controller("prerenderExampleController", ["$http", function ($http) {
+       
+        $http({
+            url: "../data.txt?t=" + (new Date()),
+            method: "GET",
+            headers: { 'Content-Type': 'html/text; charset=UTF-8' },
+        })
+        .then(
+            function (data) {
+                console.log(12)
+                var element = angular.element(document).find(".ajax-data-container");
+                //element.append("<div> Success: " + " " + new Date() + data + "</div>");
+            },
+            function (response) {
+                console.log(13)
+                angular.element(".ajax-data-container").append("<div> Error: " + " " + new Date() + response + "</div>");
+            }
+        );
+
+
+        //$http.get(
+        //     "../data.json?t=" + (new Date() + 1),
+        //     {
+        //         headers: { 'Content-Type': 'html/text; charset=UTF-8' },
+        //     }
+        //)
+        //.then({
+        //    success: function (data) {
+        //        console.log(22)
+        //        angular.element(".ajax-data-container").append("<div> Success: " + " " + new Date() + data + "</div>");
+        //    },
+        //    error: function (response) {
+        //        console.log(23)
+        //        angular.element(".ajax-data-container").append("<div> Error: " + " " + new Date() + response + "</div>");
+        //    }
+        //});
+    }]);
+
+})(window, angular)
