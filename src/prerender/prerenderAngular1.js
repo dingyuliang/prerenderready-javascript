@@ -3,7 +3,7 @@
     if (typeof angular == "undefined")
         return;
 
-    var module = angular.module("prerenderIO",[]);
+    var module = angular.module("prerenderIO", []);
 
     // we can use httpInterceptor  or request/response transformations;
     // see https://docs.angularjs.org/api/ng/service/$http

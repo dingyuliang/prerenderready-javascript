@@ -5,6 +5,8 @@
       <script>
           // setup prerenderOptions before load prerenderio. which will overwrite default options.
           // or you can overwrite it in script.js.
+          // this setting is optional, the default maxTimeout is 1000 ms.
+          // but if your longest ajax request will take longer than 1000 ms, please setup the maxTimeout setting. 
           window.prerenderOptions = {
               maxTimeout: 6000,
               ajaxCompleteTimeout: 10,

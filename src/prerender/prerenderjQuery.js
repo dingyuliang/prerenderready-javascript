@@ -3,7 +3,8 @@
     if(typeof $ == "undefined")
         return;
      
-	$(document)
+    $(document)
+    //use ajaxSend, make sure the ajax call has been sent successful.
 	.ajaxSend(function () {
 	    window.prerender.ajaxStart();
 	})

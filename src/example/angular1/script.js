@@ -6,7 +6,7 @@
     //    debug:true
     //});
 
-    var module = angular.module("prerenderExample",[]);
+    var module = angular.module("prerenderExample", ["prerenderIO"]);
 
     module.controller("prerenderExampleController", ["$http", "$element", "$timeout", function ($http, $element, $timeout) {
         $http({
