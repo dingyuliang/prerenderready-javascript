@@ -1,5 +1,5 @@
 # prerender-jsready
-The JavaScript library for prerender ready by tracking ajax call for both jQuery, angularJS.
+The JavaScript library for prerenderReady by tracking ajax call for both jQuery, angularJS.
 
 ## jQuery
 
