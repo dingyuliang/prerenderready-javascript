@@ -77,12 +77,39 @@ setTimeout(function () {
 ```     
 var module = angular.module("prerenderExample", ["prerenderIO"]);
 ```     
-  3. For AJAX call, you don't need to add any code, prerenderAngular1 will automatically track AJAX call by angularJS 1.x ($http, $http.get, $http.post, ...), and set window.prerenderReady to true after all AJAX call have been completed.
-  4. For setTimeout, you need to  
+  4. For AJAX call, you don't need to add any code, prerenderAngular1 will automatically track AJAX call by angularJS 1.x ($http, $http.get, $http.post, ...), and set window.prerenderReady to true after all AJAX call have been completed.
+  5. For setTimeout, you need to inject prerenderTimeout into your controller or directives, i.e. 
 
 ```     
-setTimeout(function () {
-  $(".ajax-data-container").append("<div> " + new Date() + " Error: " + response.responseText + "</div>");
-}, 1000, true);
+    module.controller("prerenderExampleController", ["$http", "$element", "$timeout", "prerenderTimeout", function ($http, $element, $timeout, prerenderTimeout) {
+
+        var windowTimeout = 9000;
+        var aspxTimeout = 2000;
+
+        $element.append("<div> " + new Date() + " Start:" + JSON.stringify({ windowTimeout: windowTimeout + " ms", aspxTimeout: aspxTimeout + " ms" }) + "</div>");
+
+        $http({
+            url: "../data.json?t=" + (new Date()),
+            method: "GET",
+            responseType:"json"
+        })
+        .then(
+            function (response) {
+                console.log(12);
+                var data = angular.extend({}, response.data);
+                // angular.element doesn't work in controller.
+                prerenderTimeout(function () {
+                    data.Timeout = windowTimeout + " ms";
+                    $element.append("<div> " + new Date() + " Success: " + JSON.stringify(data) + "</div>");
+                }, windowTimeout);
+            },
+            function (response) {
+                console.log(13);
+                $timeout(function () {
+                    $element.append("<div> " + new Date() + " Error: " + response + "</div>");
+                }, windowTimeout);
+            }
+        );
+   }]);
 ```
 
