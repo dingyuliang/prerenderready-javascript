@@ -18,6 +18,7 @@ There are two plugins which are built on prerenderReady library, one for jQuery,
      prerenderReady plugin for jQuery
   
   Once you have added prerenderio.js to your page, it will create a PrerenderIO object for window, you can get this object by
+  
     window.prerender
   
 ### prerenderReady options
