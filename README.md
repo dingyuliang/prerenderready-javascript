@@ -63,11 +63,12 @@ You can configure prerenderReady by calling
   3. For AJAX call, you don't need to add any code, prerenderjQuery will automatically track AJAX call by jQuery ($.ajax, $.get, $.post, ...), and set window.prerenderReady to true after all AJAX call have been completed.
   4. For setTimeout, the window.prerender object has overwritten window.setTimeout by providing 3rd parameter TRUE/FALSE.
      If you want to track setTimeout for prerenderReady, just need to give the 3rd parameter to true, i.e. 
-     
+
+```     
     setTimeout(function () {
       $(".ajax-data-container").append("<div> " + new Date() + " Error: " + response.responseText + "</div>");}, 
     windowTimeout, true);
-
+```
 
 ## use in angularJS project
 
