@@ -50,6 +50,10 @@ There are two plugins which are built on prerenderReady library, one for jQuery,
         enable:true
     };
 
+You can configure prerenderReady by calling
+
+    window.prerender.config(options)
+
 ## use in jQuery project
 
 
