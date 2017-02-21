@@ -10,12 +10,15 @@ There are two plugins which are built on prerenderReady library, one for jQuery,
     Install-Package DotNetOpen.PrerenderReady
 
   after you have installed PrerenderReady, there are 3 different javascript files.
-  1. prerenderAngular1.js
-     prerenderReady module for angularJS
-  2. prerenderio.js
+  1. prerenderio.js
      prerenderReady library
+  2. prerenderAngular1.js
+     prerenderReady module for angularJS
   3. prerenderjQuery.js
      prerenderReady plugin for jQuery
+  
+  Once you have added prerenderio.js to your page, it will create a PrerenderIO object for window, you can get this object by
+    window.prerender
   
 ### prerenderReady options
 
