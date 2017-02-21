@@ -1,5 +1,5 @@
 # prerenderReady-javascript
-The JavaScript library for prerenderReady by tracking ajax call and settimeout for both jQuery, angularJS 1.X.
+The project provides the functionality to track ajax call and settimeout for window.prerenderReady of prerender.io within jQuery application and angularJS 1.X application.
 
 ## prerenderReady Introduction
 When we use prerender.io, we can use window.prerenderReady to tell prerender.io service, the page is completely loaded. But it requires us to change a lot of existing code, which is a lot effort and not flexible.
