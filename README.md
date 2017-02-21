@@ -8,8 +8,16 @@ There are two plugins which are built on prerenderReady library, one for jQuery,
 ### install prerenderReady with Nuget
 
     Install-Package DotNetOpen.PrerenderReady
-   
-### prerenderReady configurations
+
+  after you have installed PrerenderReady, there are 3 different javascript files.
+  1. prerenderAngular1.js
+     prerenderReady module for angularJS
+  2. prerenderio.js
+     prerenderReady library
+  3. prerenderjQuery.js
+     prerenderReady plugin for jQuery
+  
+### prerenderReady options
 
     var defaultOptions = {
         // maxTimeout for all ajax calls, after this timeout, it will set prerenderReady to true.
