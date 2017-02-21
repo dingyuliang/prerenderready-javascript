@@ -1,5 +1,5 @@
 # prerenderReady-javascript
-The JavaScript library for prerenderReady by tracking ajax call and settimeout for both jQuery, angularJS.
+The JavaScript library for prerenderReady by tracking ajax call and settimeout for both jQuery, angularJS 1.X.
 
 ## prerenderReady Introduction
 When we use prerender.io, we can use window.prerenderReady to tell prerender.io service, the page is completely loaded. But it requires us to change a lot of existing code, which is a lot effort and not flexible.
@@ -65,10 +65,22 @@ You can configure prerenderReady by calling
      If you want to track setTimeout for prerenderReady, just need to give the 3rd parameter to true, i.e. 
 
 ```     
-    setTimeout(function () {
-      $(".ajax-data-container").append("<div> " + new Date() + " Error: " + response.responseText + "</div>");}, 
-    windowTimeout, true);
+setTimeout(function () {
+  $(".ajax-data-container").append("<div> " + new Date() + " Error: " + response.responseText + "</div>");
+}, 1000, true);
 ```
 
 ## use in angularJS project
+  1. Install DotNetOpen.PrerenderReady nuget package.
+  2. Add javascript references for both prerenderio.js and prerenderAngular1.js
+  3. Inject prerenderIO module to your app module
+    var module = angular.module("prerenderExample", ["prerenderIO"]);
+  3. For AJAX call, you don't need to add any code, prerenderAngular1 will automatically track AJAX call by angularJS 1.x ($http, $http.get, $http.post, ...), and set window.prerenderReady to true after all AJAX call have been completed.
+  4. For setTimeout, you need to  
+
+```     
+setTimeout(function () {
+  $(".ajax-data-container").append("<div> " + new Date() + " Error: " + response.responseText + "</div>");
+}, 1000, true);
+```
 
