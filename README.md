@@ -113,3 +113,6 @@ var module = angular.module("prerenderExample", ["prerenderIO"]);
    }]);
 ```
 
+##Examples
+  1. jQuery Example: https://github.com/dingyuliang/prerenderready-javascript/tree/master/src/example/jQuery 
+  2. angularJS 1.x Example: https://github.com/dingyuliang/prerenderready-javascript/tree/master/src/example/angular1
