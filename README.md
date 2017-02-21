@@ -74,7 +74,9 @@ setTimeout(function () {
   1. Install DotNetOpen.PrerenderReady nuget package.
   2. Add javascript references for both prerenderio.js and prerenderAngular1.js
   3. Inject prerenderIO module to your app module
-    var module = angular.module("prerenderExample", ["prerenderIO"]);
+```     
+var module = angular.module("prerenderExample", ["prerenderIO"]);
+```     
   3. For AJAX call, you don't need to add any code, prerenderAngular1 will automatically track AJAX call by angularJS 1.x ($http, $http.get, $http.post, ...), and set window.prerenderReady to true after all AJAX call have been completed.
   4. For setTimeout, you need to  
 
