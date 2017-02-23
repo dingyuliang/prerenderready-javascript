@@ -1,3 +1,10 @@
+/*
+ * version 1.0.1
+ * Github: https://github.com/dingyuliang/prerenderready-javascript
+ * Blog: http://netopensource.com/tag/prerender/
+ * License: GNU GENERAL PUBLIC LICENSE, https://github.com/dingyuliang/prerenderready-javascript/blob/master/LICENSE
+ */
+ 
 (function (window, angular) {
 
     if (typeof angular == "undefined")
