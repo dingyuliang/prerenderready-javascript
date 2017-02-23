@@ -1,5 +1,5 @@
 /*
- * version 1.0.2
+ * version 1.0.3
  * Github: https://github.com/dingyuliang/prerenderready-javascript
  * Blog: http://netopensource.com/tag/prerender/
  * License: GNU GENERAL PUBLIC LICENSE, https://github.com/dingyuliang/prerenderready-javascript/blob/master/LICENSE
